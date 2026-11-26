@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+backend/.env
+
+# Build output
+dist/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Prisma generated files
+generated/
+/generated/prisma

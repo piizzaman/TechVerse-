@@ -1,0 +1,69 @@
+.products {
+  padding: 60px;
+}
+
+.products h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 36px;
+  color: white;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: #161b22;
+  color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card h3 {
+  padding: 15px;
+  min-height: 55px;
+}
+
+.stars {
+  color: gold;
+  font-size: 18px;
+  padding: 0 15px;
+}
+
+.price {
+  padding: 0 15px;
+  color: #60a5fa;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.card button {
+  margin: 15px;
+  width: calc(100% - 30px);
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.card button:hover {
+  background: #1d4ed8;
+}

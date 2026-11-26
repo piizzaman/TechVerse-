@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  price       Float
+  stock       Int
+  image       String
+  category    String
+  description String
+
+  orderItems  OrderItem[]
+}
+
+model Customer {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  name         String
+  email        String    @unique
+  phone        String    @unique
+  passwordHash String
+  address      String?
+  createdAt    DateTime  @default(now())
+
+  addresses    Address[]
+  orders       Order[]
+}
+
+model Address {
+  id           Int      @id @default(autoincrement())
+  customerId   Int
+  type         String
+  firstName    String
+  lastName     String
+  addressLine1 String
+  addressLine2 String?
+  city         String
+  state        String
+  zipCode      String
+  country      String   @default("United States")
+  isDefault    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  customer     Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id                  Int         @id @default(autoincrement())
+  customerId          Int
+  status              String      @default("Pending")
+  subtotal            Float
+  shippingCost        Float       @default(0)
+  tax                 Float       @default(0)
+  total               Float
+  shippingFirstName   String
+  shippingLastName    String
+  shippingAddress     String
+  shippingAddress2    String?
+  shippingCity        String
+  shippingState       String
+  shippingZipCode     String
+  shippingCountry     String
+  createdAt           DateTime    @default(now())
+
+  customer            Customer    @relation(fields: [customerId], references: [id])
+  items               OrderItem[]
+}
+
+model OrderItem {
+  id          Int      @id @default(autoincrement())
+  orderId     Int
+  productId   Int
+  quantity    Int
+  price       Float
+
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id])
+}
